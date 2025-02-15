@@ -3,60 +3,78 @@
 # Contenido del Notebook 1: Descarga y Exploración del Corpus
 
 ## Instalación y Carga de Librerías
-- Instalación de librerías necesarias: **spaCy, nltk, gensim, pandas, wordcloud, matplotlib, seaborn**, entre otras.
-- Importación de librerías para el análisis de datos, procesamiento de texto y visualización.
+- Instalación de librerías necesarias (**spaCy, scikit-learn, seaborn, pandas**, etc.).
+- Configuración inicial del entorno de trabajo.
 
-## Carga y Exploración Inicial del Dataset
-- Descarga del dataset **REVIEWS HOME AND KITCHEN** desde un archivo comprimido JSON.
-- Visualización de las primeras filas del dataset y comprobación de valores nulos.
+## Carga y Exploración del Dataset
+- Descarga y carga del dataset comprimido JSON (**reviews_Home_and_Kitchen_5.json.gz**).
+- Exploración inicial del dataset:
+  - Visualización de las primeras filas.
+  - Comprobación de valores nulos.
+  - Información estadística de los datos.
 
 ## Selección y Preparación del Dataset
-- Filtrado de columnas relevantes (**reviewText** y **overall**).
-- Comprobación de valores nulos y descripción de la distribución de datos.
-- **Justificación de la selección de columnas**:
-  - **reviewText**: Contiene la opinión del usuario y será el texto preprocesado.
-  - **overall**: Representa la calificación asignada por el usuario, útil para el análisis de sentimiento.
+- Filtrado de las columnas relevantes para el **análisis de sentimiento**:
+  - **reviewText**: Texto de la reseña que será analizado.
+  - **overall**: Calificación del usuario (representa el sentimiento).
+- Justificación de la eliminación de **columnas irrelevantes** (**reviewerID, asin**, etc.).
+- Verificación de **datos finales** antes del preprocesamiento.
 
-## Análisis Exploratorio de Texto
-- Generación de **n-gramas** para identificar patrones comunes en las reseñas.
-- Cálculo de **frecuencias de palabras** y visualización con **WordCloud**.
-- Identificación de **palabras más comunes** en las reseñas.
+## Análisis Exploratorio
+### **Cardinalidad del Vocabulario**
+- Análisis del **número total de palabras únicas** en el corpus.
+- Distribución de la **frecuencia de palabras** en el dataset.
 
-## Visualización de Datos
-- Distribución de la **longitud de las reseñas** en función de la calificación.
-- Representación gráfica de la **frecuencia de palabras** más comunes en el corpus.
+### **Distribución de Clases en las Reviews**
+- Visualización de la **cantidad de reseñas** (positivas, neutras y negativas).
+- Análisis de la **proporción** de cada categoría en el dataset.
+- Estadísticas básicas sobre la **longitud de las reseñas**.
+- Distribución de la **calificación (`overall`)** en el dataset.
 
 
 # Contenido del Notebook 2: Preprocesado de Texto
 
 ## Instalación y Carga de Librerías
-- Instalación de librerías necesarias para procesamiento de lenguaje natural y análisis de texto (**spaCy, nltk, gensim, stop-words, scikit-learn**, etc.).
-- Importación de las librerías utilizadas en el preprocesamiento.
+- Instalación de librerías necesarias (**spaCy, scikit-learn, nltk, gensim, wordcloud**, etc.).
+- Configuración inicial del entorno de trabajo.
 
-## Carga y Exploración Inicial del Dataset
-- Carga del dataset comprimido JSON (**REVIEWS HOME AND KITCHEN**).
-- Exploración de datos:
-  - Visualización de la estructura del dataset.
-  - Eliminación de valores nulos.
-  - Selección de columnas relevantes (**reviewText** y **overall**).
+## Carga del Dataset Preprocesado de la Etapa 1
+- Importación del dataset previamente **explorado y filtrado**.
+- Revisión de los datos cargados y verificación de **valores nulos** antes del preprocesamiento.
 
 ## Preprocesado de Texto
-- Creación de una **función en Python** para aplicar preprocesamiento de texto.
-- **Procesos aplicados**:
-  - Eliminación de caracteres especiales y **tokenización**.
-  - Conversión de texto a **minúsculas** y eliminación de **stopwords**.
-  - **Lematización** para reducir palabras a su forma base.
-- Identificación de **errores en tokenización** y ajuste del preprocesamiento según los **n-gramas** analizados.
+### **Limpieza y Normalización**
+- Eliminación de **caracteres especiales** y **espacios en blanco**.
+- Conversión de texto a **minúsculas**.
+- Eliminación de **stopwords**.
 
-## Vectorización y Representación del Texto
-- Uso de **CountVectorizer** para representar el texto de forma numérica.
-- Generación de **embeddings con Word2Vec** para representar palabras en un espacio vectorial.
-- Aplicación de **reducción de dimensionalidad con PCA** para visualizar la relación entre palabras.
+### **Tokenización y Lematización**
+- Uso de **spaCy** para dividir el texto en palabras y convertirlas a su **forma base**.
 
-## Visualización y Análisis
-- Creación de **n-gramas** y análisis de **frecuencias**.
-- Generación de **nubes de palabras (WordCloud)** para visualizar términos más utilizados.
-- Distribución de **palabras clave en función de la calificación** de las reseñas.
+### **Corrección de Errores y Refinamiento**
+- Análisis de **palabras poco informativas**.
+- Ajustes adicionales para mejorar la calidad del **corpus**.
+
+## Análisis del Texto Preprocesado (Visualización)
+### **Frecuencia de Palabras Más Comunes**
+- Identificación de **palabras más usadas** en el corpus.
+
+### **N-grams Más Frecuentes**
+- Análisis de combinaciones de palabras (**bigrams y trigrams**) más repetidas.
+
+### **Generación de Nube de Palabras (WordCloud)**
+- Representación visual de los términos más frecuentes en el corpus preprocesado.
+
+### **Distribución de la Longitud de las Reseñas**
+- Visualización del **número de palabras por reseña** tras el preprocesamiento.
+
+## Representación de Texto con Word Embeddings
+### **Entrenamiento de Word Embeddings con Word2Vec**
+- Generación de **representaciones vectoriales** de las palabras en base a su contexto.
+
+### **Visualización en 2D de Word Embeddings**
+- Uso de **PCA** para reducir la dimensionalidad de los embeddings y representar las relaciones entre palabras en un gráfico **bidimensional**.
+
 
 
 # Contenido del Notebook 3: Entrenamiento y Testeo de un Modelo de Análisis de Sentimiento
